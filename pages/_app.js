@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { Roboto_Slab } from "next/font/google";
 
 const robotoSlab = Roboto_Slab({
-  weight: "400",
   subsets: ["latin", "cyrillic"],
 });
 
