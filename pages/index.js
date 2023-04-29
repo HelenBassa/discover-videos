@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 
 import Banner from "@/components/banner/banner";
+import NavBar from "@/components/navbar/navbar";
 
 export default function Home() {
   return (
@@ -14,8 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1>Netflix</h1>
-        {/* <NavBar></NavBar> */}
+        <NavBar username="Helen Bassa" />
         <Banner
           title="Ted Lasso"
           subTitle="American college football coach Ted Lasso heads to London to manage AFC Richmond, a struggling English Premier League football team."
