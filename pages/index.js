@@ -5,45 +5,24 @@ import NavBar from "@/components/navbar/navbar";
 import Banner from "@/components/banner/banner";
 import SectionCards from "@/components/card/section-cards";
 
-export default function Home() {
-  const disneyVideos = [
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-    {
-      imgUrl: "/static/ted-lasso.webp",
-    },
-  ];
+import { getVideos, getPopularVideos } from "@/lib/videos";
+
+export async function getServerSideProps() {
+  const disneyVideos = await getVideos("disney");
+  const travelVideos = await getVideos("travel");
+  const productivityVideos = await getVideos("productivity");
+  const popularVideos = await getPopularVideos("PL");
+  return {
+    props: { disneyVideos, travelVideos, productivityVideos, popularVideos },
+  };
+}
+
+export default function Home({
+  disneyVideos,
+  travelVideos,
+  productivityVideos,
+  popularVideos,
+}) {
   return (
     <>
       <Head>
@@ -60,9 +39,14 @@ export default function Home() {
           imgUrl="/static/ted-lasso.webp"
         />
         <div className={styles.sectionWrapper}>
-          <SectionCards title="Dysney" videos={disneyVideos} size="large" />
-          <SectionCards title="Dysney" videos={disneyVideos} size="medium" />
-          <SectionCards title="Dysney" videos={disneyVideos} size="small" />
+          <SectionCards title="Disney" videos={disneyVideos} size="large" />
+          <SectionCards title="Travel" videos={travelVideos} size="small" />
+          <SectionCards
+            title="Productivity"
+            videos={productivityVideos}
+            size="medium"
+          />
+          <SectionCards title="Popular" videos={popularVideos} size="small" />
         </div>
       </main>
     </>
