@@ -1,8 +1,9 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 
-import Banner from "@/components/banner/banner";
 import NavBar from "@/components/navbar/navbar";
+import Banner from "@/components/banner/banner";
+import Card from "@/components/card/card";
 
 export default function Home() {
   return (
@@ -20,7 +21,9 @@ export default function Home() {
           subTitle="American college football coach Ted Lasso heads to London to manage AFC Richmond, a struggling English Premier League football team."
           imgUrl="/static/ted-lasso.webp"
         />
-        {/* <Card></Card> */}
+        <Card imgUrl="/static/ted-lasso.webp" size="large" />
+        <Card imgUrl="/static/ted-lasso.webp" size="medium" />
+        <Card imgUrl="/static/ted-lasso.webp" size="small" />
       </main>
     </>
   );
