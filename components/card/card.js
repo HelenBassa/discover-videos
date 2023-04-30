@@ -9,7 +9,7 @@ const defaultImg =
 
 const defaultSize = "medium";
 
-const Card = ({ imgUrl = defaultImg, size = defaultSize }) => {
+const Card = ({ imgUrl = defaultImg, size = defaultSize, id }) => {
   const [imgSrc, setImgSrc] = useState(imgUrl);
 
   const classMap = {
@@ -23,11 +23,13 @@ const Card = ({ imgUrl = defaultImg, size = defaultSize }) => {
     setImgSrc(defaultImg);
   };
 
+  const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
+
   return (
     <div className={styles.container}>
       <motion.div
         className={`${classMap[size]} ${styles.imgMotionWrapper}`}
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ ...scale }}
       >
         <Image
           className={styles.cardImg}

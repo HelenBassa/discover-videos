@@ -3,9 +3,47 @@ import styles from "@/styles/Home.module.css";
 
 import NavBar from "@/components/navbar/navbar";
 import Banner from "@/components/banner/banner";
-import Card from "@/components/card/card";
+import SectionCards from "@/components/card/section-cards";
 
 export default function Home() {
+  const disneyVideos = [
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+    {
+      imgUrl: "/static/ted-lasso.webp",
+    },
+  ];
   return (
     <>
       <Head>
@@ -21,9 +59,11 @@ export default function Home() {
           subTitle="American college football coach Ted Lasso heads to London to manage AFC Richmond, a struggling English Premier League football team."
           imgUrl="/static/ted-lasso.webp"
         />
-        <Card imgUrl="/static/ted-lasso.webp" size="large" />
-        <Card imgUrl="/static/ted-lasso.webp" size="medium" />
-        <Card imgUrl="/static/ted-lasso.webp" size="small" />
+        <div className={styles.sectionWrapper}>
+          <SectionCards title="Dysney" videos={disneyVideos} size="large" />
+          <SectionCards title="Dysney" videos={disneyVideos} size="medium" />
+          <SectionCards title="Dysney" videos={disneyVideos} size="small" />
+        </div>
       </main>
     </>
   );
