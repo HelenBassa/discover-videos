@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import styles from "@/styles/Home.module.css";
 
 import NavBar from "@/components/navbar/navbar";
@@ -12,6 +13,7 @@ export async function getServerSideProps() {
   const travelVideos = await getVideos("travel");
   const productivityVideos = await getVideos("productivity");
   const popularVideos = await getPopularVideos("PL");
+
   return {
     props: { disneyVideos, travelVideos, productivityVideos, popularVideos },
   };
@@ -27,7 +29,10 @@ export default function Home({
     <>
       <Head>
         <title>Netflix</title>
-        <meta name="description" content="Netflix app" />
+        <meta
+          name="description"
+          content="Watch Netflix movies &amp; TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
