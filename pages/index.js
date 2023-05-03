@@ -37,7 +37,7 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <NavBar username="Helen Bassa" />
+        <NavBar />
         <Banner
           title="Ted Lasso"
           subTitle="American college football coach Ted Lasso heads to London to manage AFC Richmond, a struggling English Premier League football team."
