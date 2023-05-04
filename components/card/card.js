@@ -19,7 +19,7 @@ const Card = ({ imgUrl = defaultImg, size = defaultSize, id }) => {
   };
 
   const handleOnError = () => {
-    console.log("Error: imgUrl not found");
+    console.error("Error: imgUrl not found");
     setImgSrc(defaultImg);
   };
 

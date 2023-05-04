@@ -18,11 +18,10 @@ const NavBar = () => {
       try {
         const { email } = await magic.user.getMetadata();
         if (email) {
-          console.log({ email });
           setUsername(email);
         }
       } catch (error) {
-        console.log("Error retrieving email:", error);
+        console.error("Error retrieving email:", error);
       }
     }
     getUsername();
@@ -51,7 +50,7 @@ const NavBar = () => {
       console.log(await magic.user.isLoggedIn()); // => `false`
       router.push("/login");
     } catch (error) {
-      console.log("Error logging out:", error);
+      console.error("Error logging out:", error);
     }
   };
 
