@@ -1,11 +1,41 @@
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 
+import { getYoutubeVideoById } from "@/lib/videos";
+
+import NavBar from "@/components/navbar/navbar";
+
 import styles from "@/styles/Video.module.css";
 
 Modal.setAppElement("#__next");
 
-const Video = () => {
+export async function getStaticProps(context) {
+  const id = context.params.id;
+
+  const videoArray = await getYoutubeVideoById(id);
+
+  return {
+    props: {
+      video: videoArray.length ? videoArray[0] : {},
+    },
+    revalidate: 10, // In seconds
+  };
+}
+
+export async function getStaticPaths() {
+  const listOfVideos = ["mYfJxlgR2jw", "4zH5iYM4wJo", "KCPEHsAViiQ"];
+
+  const paths = listOfVideos.map((id) => ({
+    params: { id },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: "blocking" };
+}
+
+const Video = ({ video }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -13,19 +43,17 @@ const Video = () => {
     router.back();
   };
 
-  const video = {
-    title: "Ted Lasso",
-    publishTime: "2023-05-04",
-    description:
-      "Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description Ted Lasso long long long long long long description",
-    channelTitle: "Apple TV",
-    viewCount: 10000,
-  };
-
-  const { title, publishTime, description, channelTitle, viewCount } = video;
+  const {
+    title,
+    publishTime,
+    description,
+    channelTitle,
+    viewCount = 0,
+  } = video;
 
   return (
     <div className={styles.container}>
+      <NavBar />
       <Modal
         isOpen={true}
         contentLabel="Watch the video"
@@ -40,7 +68,7 @@ const Video = () => {
           width="640"
           height="360"
           src={`https://www.youtube.com/embed/${id}?autoplay=1&origin=http://example.com&controls=0&rel=1`}
-          frameborder="0"
+          frameBorder="0"
         ></iframe>
         <div className={styles.modalBody}>
           <div className={styles.modalBodyContent}>

@@ -1,14 +1,3 @@
-.overlay {  
-  top: 0;  
-  left: 0;  
-  right: 0;  
-  bottom: 0;  
-  width: 100%;  
-  height: 100vh;
-  background: linear-gradient(to top, var(--black10), transparent 30%);
-
-}
-
 .modal {
   position: absolute;
   /** centers modal **/
@@ -19,11 +8,22 @@
   width: 800px;
   bottom: 40px;
   background-color: var(--black40);
-  top: 5%;
+  top: 10%;
 
   outline: none;
   border-radius: 10px;
   border: 1px solid var(--shadow10);
+}
+
+.overlay {  
+  top: 0;  
+  left: 0;  
+  right: 0;  
+  bottom: 0;  
+  width: 100%;  
+  height: 100vh;
+  background: linear-gradient(to top, var(--black10), transparent 30%);
+
 }
 
 
@@ -58,7 +58,7 @@
 }
 
 .col1 {
-  max-height: 20rem /* 208px */;
+  max-height: 20em /* 208px */;
   /* overflow-y: hidden;
   overflow-y: scroll; */
 }
@@ -113,8 +113,10 @@
   margin: 0px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
   .modal {
-    width: 100%;
+    top: 10%;
+    bottom: 40px;
+    width: 50%;
   }
 }
