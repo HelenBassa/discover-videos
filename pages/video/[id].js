@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "react-modal";
 
@@ -57,15 +57,61 @@ const Video = ({ video }) => {
     viewCount = 0,
   } = video;
 
-  const handleToggleLike = () => {
-    console.log("handleToggleLike");
-    setToggleLike(!toggleLike);
-    setToggleDislike(toggleLike);
+  useEffect(() => {
+    async function getFavourited() {
+      const response = await fetch(`/api/stats?videoId=${id}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+
+      if (data.findVideo.length > 0) {
+        const favourited = data.findVideo[0].favourited;
+
+        if (favourited === 1) {
+          setToggleLike(true);
+        } else if (favourited === 0) {
+          setToggleDislike(true);
+        }
+      }
+    }
+    getFavourited();
+  }, []);
+
+  const runRatingService = async (favourited) => {
+    return await fetch("/api/stats", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        videoId: id,
+        favourited,
+      }),
+    });
   };
-  const handleToggleDislike = () => {
-    console.log("handleToggleDislike");
-    setToggleDislike(!toggleDislike);
+
+  const handleToggleLike = async () => {
+    const value = !toggleLike;
+    setToggleLike(value);
+    setToggleDislike(toggleLike);
+
+    const favourited = value ? 1 : 0;
+
+    const response = await runRatingService(favourited);
+
+    console.log("data", await response.json());
+  };
+
+  const handleToggleDislike = async () => {
+    const value = !toggleDislike;
+    setToggleDislike(value);
     setToggleLike(toggleDislike);
+
+    const favourited = value ? 0 : 1;
+
+    const response = await runRatingService(favourited);
+
+    console.log("data", await response.json());
   };
   return (
     <div className={styles.container}>
