@@ -6,20 +6,46 @@ import NavBar from "@/components/navbar/navbar";
 import Banner from "@/components/banner/banner";
 import SectionCards from "@/components/card/section-cards";
 
-import { getVideos, getPopularVideos } from "@/lib/videos";
+import {
+  getWatchItAgainVideos,
+  getVideos,
+  getPopularVideos,
+} from "@/lib/videos";
 
-export async function getServerSideProps() {
+import useRedirectUser from "@/utils/redirectUser";
+
+export async function getServerSideProps(context) {
+  const { token, userId } = await useRedirectUser(context);
+
+  if (!userId) {
+    return {
+      props: {},
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const watchItAgainVideos = await getWatchItAgainVideos(token, userId);
   const disneyVideos = await getVideos("disney");
   const travelVideos = await getVideos("travel");
   const productivityVideos = await getVideos("productivity");
   const popularVideos = await getPopularVideos("PL");
 
   return {
-    props: { disneyVideos, travelVideos, productivityVideos, popularVideos },
+    props: {
+      watchItAgainVideos,
+      disneyVideos,
+      travelVideos,
+      productivityVideos,
+      popularVideos,
+    },
   };
 }
 
 export default function Home({
+  watchItAgainVideos,
   disneyVideos,
   travelVideos,
   productivityVideos,
@@ -45,6 +71,11 @@ export default function Home({
           imgUrl="/static/ted-lasso.webp"
         />
         <div className={styles.sectionWrapper}>
+          <SectionCards
+            title="Watch it again"
+            videos={watchItAgainVideos}
+            size="small"
+          />
           <SectionCards title="Disney" videos={disneyVideos} size="large" />
           <SectionCards title="Travel" videos={travelVideos} size="small" />
           <SectionCards
