@@ -98,8 +98,6 @@ const Video = ({ video }) => {
     const favourited = value ? 1 : 0;
 
     const response = await runRatingService(favourited);
-
-    console.log("data", await response.json());
   };
 
   const handleToggleDislike = async () => {
@@ -110,8 +108,6 @@ const Video = ({ video }) => {
     const favourited = value ? 0 : 1;
 
     const response = await runRatingService(favourited);
-
-    console.log("data", await response.json());
   };
   return (
     <div className={styles.container}>
