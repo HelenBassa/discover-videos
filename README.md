@@ -23,7 +23,7 @@ Video page:![video-page](https://github.com/HelenBassa/discover-videos/assets/31
 My List page:![my-list-page](https://github.com/HelenBassa/discover-videos/assets/31656183/7d01f7c6-311a-46b7-ad87-ffc669dc1dde)
 
 ### 2. Deploy: 
-[https://discover-coffee-stores-helenbassa.vercel.app/](https://discover-videos-helenbassa.vercel.app/)
+[https://discover-videos-helenbassa.vercel.app/](https://discover-videos-helenbassa.vercel.app/)
 
 ## Built with:
 
